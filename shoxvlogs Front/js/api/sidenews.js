@@ -2,7 +2,8 @@ fetch("http://localhost:8080/api/new").then(r => r.json())
     .then(d => sidebarNews(d))
 
 function sidebarNews(data) {
-    for (let d of data.content) {
+    for (let i = data.content.length; i < 0; i--) {
+        console.log(i);
         let oneDiv = document.createElement("div");
         oneDiv.className = "media media-body media--card media--card-2";
 
@@ -12,8 +13,12 @@ function sidebarNews(data) {
 
         let h5 = document.createElement("h5");
         h5.innerHTML = d.matn;
-        h5.setAttribute('id', 'click')
+        h5.setAttribute('id', 'key')
+        h5.setAttribute('data-i', d.id)
         twoDiv.appendChild(h5);
+
+        let a = document.createElement('a');
+        a.href = $`#{d.id}`
 
         let small = document.createElement("small");
         small.className = "meta";
@@ -29,5 +34,21 @@ function sidebarNews(data) {
     }
 }
 
-let h5 = document.getElementById("click");
-console.log(h5);
+function selectNews(id) {
+    console.log(id);
+    window.location.assign('./new.html#' + id)
+    console.log(window.location);
+}
+
+let selectH5 = null
+
+let newId = document.getElementById("news");
+newId.addEventListener('click', e => {
+    for (let i of e.path) {
+        if (i.id == "key") {
+            selectNews(i.dataset.i)
+        }
+    }
+})
+
+

@@ -1,4 +1,4 @@
-fetch("http://localhost:8080/api/new").then(r => r.json())
+fetch("http://localhost:8080/api/new?size=3").then(r => r.json())
     .then(d => sidebarNews(d))
 
 function sidebarNews(data) {
@@ -34,7 +34,7 @@ let newId = document.getElementById("news");
 newId.addEventListener('click', e => {
     for (let i of e.path) {
         if (i.id == "key") {
-            window.location.assign('./new.html#' + i.dataset.i)
+            window.location.assign('./new.html#' + i.dataset.i);
         }
     }
 })

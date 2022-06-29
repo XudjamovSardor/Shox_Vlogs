@@ -4,13 +4,9 @@ let pathHash = window.location.hash.split("#")
 console.log(pathHash);
 
 
-fetch('http://localhost:8080/api/new/search/' + pathHash[1])
+fetch('https://api.shoxvlogs.uz/api/new/search/' + pathHash[1])
     .then(response => response.json())
     .then(data => matnDate(data));
-
-// fetch('http://localhost:8080/api/onlinenew/false?type=YouTube&size=3')
-//     .then(r => r.json())
-//     .then(d => addShortIframe(d))
 
 
 function matnDate(data) {
@@ -22,7 +18,7 @@ function matnDate(data) {
     news.innerText = data.tuliqMalumot;
 
     let img = document.getElementById('img')
-    img.src = 'http://localhost:8080/api/fail/download/' + data?.image?.id
+    img.src = 'https://api/shoxvlogs.uz/api/fail/download/' + data?.image?.id
     
     if (data.onlineYangilik) {
         let ifram = document.createElement('iframe');
